@@ -1,0 +1,36 @@
+# .gitlab-ci.yml
+
+image: python:3.10
+
+stages:
+  - test
+  - deploy
+
+variables:
+  PYTHONPATH: "."    # so tests can import from your project root
+
+before_script:
+  - python --version
+  - pip install --upgrade pip
+  # Install your dependencies here manually:
+  - pip install fastapi uvicorn pytest sqlalchemy python-jose passlib    # <- change/add as needed
+
+pytest_job:
+  stage: test
+  script:
+    - pytest tests/test_curd.py
+  artifacts:
+    when: always
+    reports:
+      junit: pytest-report.xml
+    paths:
+      - pytest-report.xml
+  only:
+    - branches
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploy or start server here, e.g. uvicorn main:app --host 0.0.0.0 --port 8000"
+  only:
+    - main
