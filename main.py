@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database.database import SessionLocal, engine, Base
-import models.models as models, services.crud as crud, schemas.schemas as schemas
-from routes import user
+import models.user.models as models, services.crud as crud, schemas.user.schemas as schemas
+from routes.user import user
 
 import redis
 

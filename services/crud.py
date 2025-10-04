@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from models.models import User
-from schemas.schemas import UserCreate,LoginData
+from models.user.models import User
+from schemas.user.schemas import UserCreate,LoginData
 # import redis
 from auth.auth import pwd_context,create_access_token
 
